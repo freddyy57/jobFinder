@@ -3,16 +3,15 @@ var jobModel = require('./models/Job');
 var jobsData = require("./jobs-data.js");
 
 var app = express();
+
+require("./jobs-service.js")(jobsData,app);
+
 app.set('views',__dirname);
 app.set('view engine','jade');
 
 app.use(express.static(__dirname + '/public'));
 //creamos una vista para la base de datos
-app.get('/api/jobs',function(req,res) {
-   jobsData.findJobs().then(function(collection){
-       res.send(collection);
-   });
-});
+
 
 
 app.get('*',function(req,res) {
